@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { motion, MotionConfig } from 'motion/react';
 import {
   ArrowUp,
   Calendar,
@@ -146,11 +147,12 @@ export default function App() {
   ];
 
   return (
-    <div
-      className={`min-h-screen bg-[#FBF6EC] text-[#241610] pb-14 md:pb-0 ${
-        lang === 'kn' ? 'font-kannada' : ''
-      }`}
-    >
+    <MotionConfig reducedMotion="user">
+      <div
+        className={`min-h-screen bg-[#FBF6EC] text-[#241610] pb-14 md:pb-0 ${
+          lang === 'kn' ? 'font-kannada' : ''
+        }`}
+      >
       {/* Top Bar Contract: 3 zones separated by gap-8 */}
       <header className="sticky top-0 z-40 bg-[#FBF6EC]/95 backdrop-blur-sm border-b border-[#C9A65B]/55">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-12 md:h-16 flex items-center justify-between gap-4 md:gap-8">
@@ -490,7 +492,13 @@ export default function App() {
           id="ceremonies"
           className="scroll-mt-14 md:scroll-mt-16 bg-[#F4EBDA]/65 py-12 sm:py-16 lg:py-24 border-t border-[#C9A65B]/50"
         >
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 'some' }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-6xl mx-auto px-4 sm:px-6"
+          >
             <div className="max-w-3xl mx-auto text-center">
               <div className="flex justify-center mb-3">
                 <MangalaKalasha className="w-11 h-11" />
@@ -571,7 +579,7 @@ export default function App() {
                 );
               })}
             </div>
-          </div>
+          </motion.div>
         </section>
 
         <ZariTempleBorder className="bg-[#FBF6EC]" />
@@ -581,6 +589,12 @@ export default function App() {
           id="gallery"
           className="scroll-mt-14 md:scroll-mt-16 max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-24"
         >
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 'some' }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          >
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4 mb-7 sm:mb-10">
             <div>
               <p className="text-[11px] sm:text-xs tracking-[0.16em] uppercase text-[#7A1C24] font-medium">
@@ -600,8 +614,16 @@ export default function App() {
               const isMobileFull = index === 0 || index === 5 || index === 6;
               const isWideFeature = index === 5;
               return (
-                <figure
+                <motion.figure
                   key={photo.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{
+                    duration: 0.5,
+                    delay: (index % 3) * 0.08,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
                   className={
                     isWideFeature
                       ? 'col-span-2 lg:col-span-2'
@@ -641,10 +663,11 @@ export default function App() {
                       {String(index + 1).padStart(2, '0')}
                     </span>
                   </figcaption>
-                </figure>
+                </motion.figure>
               );
             })}
           </div>
+          </motion.div>
         </section>
 
         {/* Section 4: Venue & Directions */}
@@ -652,7 +675,13 @@ export default function App() {
           id="venue"
           className="scroll-mt-14 md:scroll-mt-16 border-t border-[#C9A65B]/55 bg-[#F4EBDA]/65 py-12 sm:py-16 lg:py-24"
         >
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 'some' }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-6xl mx-auto px-4 sm:px-6"
+          >
             <div className="max-w-2xl mb-7 sm:mb-10">
               <p className="text-[11px] sm:text-xs tracking-[0.16em] uppercase text-[#7A1C24] font-medium">
                 {COPY.nav.venue[lang]}
@@ -740,7 +769,7 @@ export default function App() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </section>
       </main>
 
@@ -808,5 +837,6 @@ export default function App() {
         </button>
       )}
     </div>
+    </MotionConfig>
   );
 }
