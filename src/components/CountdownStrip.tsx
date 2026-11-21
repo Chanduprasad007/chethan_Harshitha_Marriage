@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { COPY, Language, VENUE_DETAILS } from '../data/weddingData';
+import { ZariTempleBorder } from './MonogramAndMotifs';
 
 interface CountdownState {
   days: number;
@@ -44,51 +45,52 @@ export function CountdownStrip({ lang }: { lang: Language }) {
   return (
     <section
       aria-label={COPY.countdown.muhurthamLabel[lang]}
-      className="border-y border-[#DFD5C5] bg-[#F2ECE1]/70"
+      className="bg-[#F4EBDA]/80"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-5 sm:py-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-0 divide-y sm:divide-y-0 lg:divide-x divide-[#DFD5C5]">
+      <ZariTempleBorder />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-5 sm:py-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-0 divide-y sm:divide-y-0 lg:divide-x divide-[#C9A65B]/45">
         <div className="lg:pr-8">
-          <p className="text-[11px] sm:text-xs tracking-[0.14em] uppercase text-[#6E6056]">
+          <p className="text-[11px] sm:text-xs tracking-[0.14em] uppercase text-[#7A1C24] font-medium">
             {COPY.countdown.muhurthamLabel[lang]}
           </p>
           {timeLeft.completed ? (
-            <p className="mt-2 font-editorial text-2xl font-medium text-[#9F2B42]">
+            <p className="mt-2 font-editorial text-2xl font-medium text-[#7A1C24]">
               {COPY.countdown.celebrating[lang]}
             </p>
           ) : (
             <div className="mt-2.5 grid grid-cols-4 sm:flex sm:items-baseline gap-2 sm:gap-3 tabular-nums">
-              <div className="bg-[#FAF7F2]/75 sm:bg-transparent rounded-lg py-2 px-1 sm:p-0 text-center sm:text-left border border-[#DFD5C5]/70 sm:border-0">
-                <span className="block sm:inline font-editorial text-2xl sm:text-3xl font-semibold text-[#1C1714] leading-none">
+              <div className="bg-[#FBF6EC] sm:bg-transparent rounded-lg py-2 px-1 sm:p-0 text-center sm:text-left border border-[#C9A65B]/55 sm:border-0">
+                <span className="block sm:inline font-editorial text-2xl sm:text-3xl font-semibold text-[#241610] leading-none">
                   {pad(timeLeft.days)}
                 </span>
-                <span className="block sm:inline sm:ml-1 mt-1 sm:mt-0 text-[11px] sm:text-xs text-[#6E6056]">
+                <span className="block sm:inline sm:ml-1 mt-1 sm:mt-0 text-[11px] sm:text-xs text-[#5B4333]">
                   {COPY.countdown.days[lang]}
                 </span>
               </div>
-              <span className="hidden sm:inline text-[#8C6629]" aria-hidden="true">·</span>
-              <div className="bg-[#FAF7F2]/75 sm:bg-transparent rounded-lg py-2 px-1 sm:p-0 text-center sm:text-left border border-[#DFD5C5]/70 sm:border-0">
-                <span className="block sm:inline font-editorial text-2xl sm:text-3xl font-semibold text-[#1C1714] leading-none">
+              <span className="hidden sm:inline text-[#B0812C]" aria-hidden="true">·</span>
+              <div className="bg-[#FBF6EC] sm:bg-transparent rounded-lg py-2 px-1 sm:p-0 text-center sm:text-left border border-[#C9A65B]/55 sm:border-0">
+                <span className="block sm:inline font-editorial text-2xl sm:text-3xl font-semibold text-[#241610] leading-none">
                   {pad(timeLeft.hours)}
                 </span>
-                <span className="block sm:inline sm:ml-1 mt-1 sm:mt-0 text-[11px] sm:text-xs text-[#6E6056]">
+                <span className="block sm:inline sm:ml-1 mt-1 sm:mt-0 text-[11px] sm:text-xs text-[#5B4333]">
                   {COPY.countdown.hours[lang]}
                 </span>
               </div>
-              <span className="hidden sm:inline text-[#8C6629]" aria-hidden="true">·</span>
-              <div className="bg-[#FAF7F2]/75 sm:bg-transparent rounded-lg py-2 px-1 sm:p-0 text-center sm:text-left border border-[#DFD5C5]/70 sm:border-0">
-                <span className="block sm:inline font-editorial text-2xl sm:text-3xl font-semibold text-[#1C1714] leading-none">
+              <span className="hidden sm:inline text-[#B0812C]" aria-hidden="true">·</span>
+              <div className="bg-[#FBF6EC] sm:bg-transparent rounded-lg py-2 px-1 sm:p-0 text-center sm:text-left border border-[#C9A65B]/55 sm:border-0">
+                <span className="block sm:inline font-editorial text-2xl sm:text-3xl font-semibold text-[#241610] leading-none">
                   {pad(timeLeft.minutes)}
                 </span>
-                <span className="block sm:inline sm:ml-1 mt-1 sm:mt-0 text-[11px] sm:text-xs text-[#6E6056]">
+                <span className="block sm:inline sm:ml-1 mt-1 sm:mt-0 text-[11px] sm:text-xs text-[#5B4333]">
                   {COPY.countdown.mins[lang]}
                 </span>
               </div>
-              <span className="hidden sm:inline text-[#8C6629]" aria-hidden="true">·</span>
-              <div className="bg-[#FAF7F2]/75 sm:bg-transparent rounded-lg py-2 px-1 sm:p-0 text-center sm:text-left border border-[#DFD5C5]/70 sm:border-0">
-                <span className="block sm:inline font-editorial text-2xl sm:text-3xl font-semibold text-[#9F2B42] leading-none">
+              <span className="hidden sm:inline text-[#B0812C]" aria-hidden="true">·</span>
+              <div className="bg-[#FBF6EC] sm:bg-transparent rounded-lg py-2 px-1 sm:p-0 text-center sm:text-left border border-[#C9A65B]/55 sm:border-0">
+                <span className="block sm:inline font-editorial text-2xl sm:text-3xl font-semibold text-[#7A1C24] leading-none">
                   {pad(timeLeft.seconds)}
                 </span>
-                <span className="block sm:inline sm:ml-1 mt-1 sm:mt-0 text-[11px] sm:text-xs text-[#6E6056]">
+                <span className="block sm:inline sm:ml-1 mt-1 sm:mt-0 text-[11px] sm:text-xs text-[#5B4333]">
                   {COPY.countdown.secs[lang]}
                 </span>
               </div>
@@ -97,32 +99,33 @@ export function CountdownStrip({ lang }: { lang: Language }) {
         </div>
 
         <div className="pt-4 sm:pt-0 lg:px-8">
-          <p className="text-[11px] sm:text-xs tracking-[0.14em] uppercase text-[#6E6056]">
+          <p className="text-[11px] sm:text-xs tracking-[0.14em] uppercase text-[#5B4333]">
             {COPY.countdown.receptionLabel[lang]}
           </p>
-          <p className="mt-1.5 sm:mt-2 font-editorial text-lg sm:text-xl font-medium text-[#1C1714] tabular-nums">
+          <p className="mt-1.5 sm:mt-2 font-editorial text-lg sm:text-xl font-semibold text-[#241610] tabular-nums">
             {COPY.countdown.receptionValue[lang]}
           </p>
         </div>
 
         <div className="pt-4 sm:pt-0 lg:px-8">
-          <p className="text-[11px] sm:text-xs tracking-[0.14em] uppercase text-[#6E6056]">
+          <p className="text-[11px] sm:text-xs tracking-[0.14em] uppercase text-[#5B4333]">
             {COPY.countdown.muhurthamDateLabel[lang]}
           </p>
-          <p className="mt-1.5 sm:mt-2 font-editorial text-lg sm:text-xl font-medium text-[#1C1714] tabular-nums">
+          <p className="mt-1.5 sm:mt-2 font-editorial text-lg sm:text-xl font-semibold text-[#241610] tabular-nums">
             {COPY.countdown.muhurthamDateValue[lang]}
           </p>
         </div>
 
         <div className="pt-4 sm:pt-0 lg:pl-8">
-          <p className="text-[11px] sm:text-xs tracking-[0.14em] uppercase text-[#6E6056]">
+          <p className="text-[11px] sm:text-xs tracking-[0.14em] uppercase text-[#5B4333]">
             {COPY.countdown.lagnaLabel[lang]}
           </p>
-          <p className="mt-1.5 sm:mt-2 font-editorial text-lg sm:text-xl font-medium text-[#1C1714]">
+          <p className="mt-1.5 sm:mt-2 font-editorial text-lg sm:text-xl font-semibold text-[#241610]">
             {COPY.countdown.lagnaValue[lang]}
           </p>
         </div>
       </div>
+      <ZariTempleBorder />
     </section>
   );
 }

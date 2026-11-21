@@ -9,8 +9,8 @@
 @layer base {
   html {
     font-family: var(--font-sans);
-    background-color: #FAF7F2;
-    color: #1C1714;
+    background-color: #FBF6EC;
+    color: #241610;
   }
 
   @media (prefers-reduced-motion: reduce) {
