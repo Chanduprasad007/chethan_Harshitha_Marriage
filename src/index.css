@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", "Noto Serif Kannada", Georgia, serif;
+  --font-kannada: "Noto Serif Kannada", "Cormorant Garamond", serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: #FAF7F2;
+    color: #1C1714;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+.font-editorial {
+  font-family: "Cormorant Garamond", "Noto Serif Kannada", Georgia, serif;
+}
+
+.font-kannada {
+  font-family: "Noto Serif Kannada", "Cormorant Garamond", serif;
+}
