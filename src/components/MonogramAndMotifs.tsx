@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 export function CoupleMonogram({ className = 'w-14 h-14' }: { className?: string }) {
   return (
     <svg
@@ -32,68 +34,32 @@ export function CoupleMonogram({ className = 'w-14 h-14' }: { className?: string
   );
 }
 
-export function GaneshaCrest({ className = 'w-14 h-14' }: { className?: string }) {
+export function GaneshaCrest({ className = 'w-16 h-16 sm:w-20 sm:h-20' }: { className?: string }) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <div
+        className={`rounded-full border border-[#B0812C]/80 bg-[#F4EBDA] flex items-center justify-center text-[#7A1C24] font-kannada text-lg font-semibold ${className}`}
+        aria-label="Sri Ganesha"
+      >
+        ಶ್ರೀ
+      </div>
+    );
+  }
+
   return (
-    <svg
-      viewBox="0 0 80 80"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      aria-hidden="true"
+    <div
+      className={`relative rounded-full overflow-hidden border-2 border-[#B0812C]/80 bg-[#F4EBDA] shadow-xs ${className}`}
     >
-      <circle cx="40" cy="40" r="36" stroke="#B0812C" strokeWidth="1.2" strokeOpacity="0.65" />
-      <circle cx="40" cy="40" r="32" stroke="#7A1C24" strokeWidth="0.7" strokeOpacity="0.35" />
-      {/* Crown */}
-      <path
-        d="M32 23C34 17 37 14 40 12C43 14 46 17 48 23"
-        stroke="#B0812C"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+      <img
+        src="/src/assets/images/sri_ganesha_emblem_1795285964740.jpg"
+        alt="Sri Ganesha temple gold emblem"
+        referrerPolicy="no-referrer"
+        onError={() => setFailed(true)}
+        className="w-full h-full object-cover scale-[1.42] object-[50%_54%]"
       />
-      <path
-        d="M30 25H50"
-        stroke="#B0812C"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      {/* Ears */}
-      <path
-        d="M28 29C21 28 18 35 21 42C23 45 26 45 28 43"
-        stroke="#7A1C24"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M52 29C59 28 62 35 59 42C57 45 54 45 52 43"
-        stroke="#7A1C24"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      {/* Head & Trunk */}
-      <path
-        d="M30 28C30 24 50 24 50 28C51 35 48 41 44 44C41 46 40 50 43 54C46 57 51 56 51 52"
-        stroke="#7A1C24"
-        strokeWidth="1.7"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M30 28C29 36 33 42 36 45C37 47 37 51 35 54"
-        stroke="#7A1C24"
-        strokeWidth="1.7"
-        strokeLinecap="round"
-      />
-      {/* Tilaka */}
-      <path d="M40 27V31" stroke="#B0812C" strokeWidth="1.5" strokeLinecap="round" />
-      {/* Lotus base */}
-      <path
-        d="M27 61C31 58 36 58 40 61C44 58 49 58 53 61"
-        stroke="#B0812C"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-      />
-    </svg>
+    </div>
   );
 }
 

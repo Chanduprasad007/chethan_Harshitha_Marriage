@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, MotionConfig } from 'motion/react';
 import {
   ArrowUp,
@@ -11,6 +11,8 @@ import {
   MapPin,
   Phone,
   ScrollText,
+  Volume2,
+  VolumeX,
 } from 'lucide-react';
 import {
   COPY,
@@ -80,6 +82,67 @@ export default function App() {
   const [copiedAddress, setCopiedAddress] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeSection, setActiveSection] = useState<SectionId>('invitation');
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const userMutedRef = useRef(false);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.volume = 0.45;
+
+    const removeInteractionListeners = () => {
+      window.removeEventListener('pointerdown', handleFirstInteraction);
+      window.removeEventListener('touchstart', handleFirstInteraction);
+      window.removeEventListener('keydown', handleFirstInteraction);
+    };
+
+    const attemptPlay = async () => {
+      if (userMutedRef.current || !audioRef.current) return;
+      try {
+        await audioRef.current.play();
+        setIsMusicPlaying(true);
+        removeInteractionListeners();
+      } catch {
+        setIsMusicPlaying(false);
+      }
+    };
+
+    const handleFirstInteraction = () => {
+      void attemptPlay();
+    };
+
+    void attemptPlay();
+
+    window.addEventListener('pointerdown', handleFirstInteraction, { passive: true });
+    window.addEventListener('touchstart', handleFirstInteraction, { passive: true });
+    window.addEventListener('keydown', handleFirstInteraction);
+
+    return () => {
+      removeInteractionListeners();
+      audio.pause();
+    };
+  }, []);
+
+  const toggleMusic = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isMusicPlaying) {
+      userMutedRef.current = true;
+      audio.pause();
+      setIsMusicPlaying(false);
+    } else {
+      userMutedRef.current = false;
+      try {
+        await audio.play();
+        setIsMusicPlaying(true);
+      } catch {
+        setIsMusicPlaying(false);
+      }
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -312,7 +375,7 @@ export default function App() {
 
                 {/* Ganesha Crest & Monogram Header */}
                 <div className="mt-2 lg:mt-7 flex items-center gap-3.5 sm:gap-4">
-                  <GaneshaCrest className="w-12 h-12 sm:w-14 sm:h-14 shrink-0" />
+                  <GaneshaCrest className="w-16 h-16 sm:w-20 sm:h-20 shrink-0" />
                   <div className="min-w-0">
                     <p className="text-xs sm:text-sm font-medium text-[#7A1C24]">
                       {lang === 'kn'
@@ -825,6 +888,40 @@ export default function App() {
         onClose={closeLightbox}
         onSelectIndex={(idx) => setLightboxIndex(idx)}
       />
+
+      <audio
+        ref={audioRef}
+        src="/assets/aistudio/ethnicsoundscapes-indian-tanpura-313494_51066138.mp3"
+        loop
+        preload="auto"
+        playsInline
+        onPlay={() => setIsMusicPlaying(true)}
+        onPause={() => setIsMusicPlaying(false)}
+      />
+
+      {lightboxIndex === null && (
+        <button
+          type="button"
+          onClick={toggleMusic}
+          aria-pressed={isMusicPlaying}
+          aria-label={
+            isMusicPlaying
+              ? lang === 'kn'
+                ? 'ತಂಬೂರಿ ಸಂಗೀತ ನಿಲ್ಲಿಸಿ'
+                : 'Mute background tanpura music'
+              : lang === 'kn'
+              ? 'ತಂಬೂರಿ ಸಂಗೀತ ಆಲಿಸಿ'
+              : 'Play background tanpura music'
+          }
+          className="fixed bottom-16 left-4 md:bottom-6 md:left-6 z-30 inline-flex items-center justify-center w-11 h-11 rounded-full bg-[#FBF6EC]/95 text-[#7A1C24] border border-[#B0812C] shadow-md hover:bg-[#7A1C24] hover:text-[#FBF6EC] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7A1C24] focus-visible:ring-offset-2"
+        >
+          {isMusicPlaying ? (
+            <Volume2 className="w-4 h-4" />
+          ) : (
+            <VolumeX className="w-4 h-4" />
+          )}
+        </button>
+      )}
 
       {showScrollTop && lightboxIndex === null && (
         <button
